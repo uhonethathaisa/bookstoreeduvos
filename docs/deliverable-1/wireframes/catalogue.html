@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframe 02 — Catalogue</title>
+<link rel="stylesheet" href="wf.css">
+</head>
+<body>
+<div class="page">
+  <span class="wf-cap">Wireframe 02 / 05 — Catalogue page</span>
+
+  <header class="wf-header">
+    <div class="wf-logo">📚 BookNest</div>
+    <div class="wf-search">🔍 Search… <span class="wf-tag">autocomplete</span></div>
+    <nav class="wf-nav"><span>Log in</span><span>Cart 🛒 <span class="wf-badge">2</span></span></nav>
+  </header>
+
+  <main class="wf-row">
+    <!-- ============ FILTER SIDEBAR ============ -->
+    <aside class="wf-sidebar wf">
+      <div class="wf-tabs">
+        <div class="wf-tab active">Filters</div>
+        <div class="wf-tab">Sort</div>
+      </div>
+      <div class="wf-filt"><b>Genre</b> ☑ Fiction &nbsp; ☐ Non-fiction &nbsp; ☐ Children's</div>
+      <div class="wf-filt"><b>Author</b> ▾ dropdown (A–Z)</div>
+      <div class="wf-filt"><b>Rating</b> ★ 4+ &nbsp; ★ 3+ &nbsp; ★ 2+</div>
+      <div class="wf-filt"><b>Price</b> min–max slider / £0–£30</div>
+      <div class="wf-filt"><b>Availability</b> ☑ In stock only</div>
+      <div style="margin-top:10px"><span class="wf-btn ghost">Apply</span> <span class="wf-btn blueprint">Reset</span></div>
+    </aside>
+
+    <!-- ============ RESULTS ============ -->
+    <section class="wf-col">
+      <div class="wf-row" style="justify-content:space-between;align-items:center">
+        <div class="wf-title">Fiction <span style="font-size:12px;color:#68798a">(248 results)</span></div>
+        <div>Sort by: <b>Bestsellers ▾</b> <span class="wf-tag">new arrivals · price ↑↓ · rating</span></div>
+      </div>
+
+      <div class="wf-grid" style="grid-template-columns:repeat(3,1fr)">
+        <div class="wf-card"><div class="wf-cover">cover</div><b>The Silent Patient</b><br>Alex Michaelides<br>★ 4.6 · £8.99 <span class="wf-badge">Sale</span></div>
+        <div class="wf-card"><div class="wf-cover">cover</div><b>Dune</b><br>Frank Herbert<br>★ 4.7 · £9.49</div>
+        <div class="wf-card"><div class="wf-cover">cover</div><b>Normal People</b><br>Sally Rooney<br>★ 4.1 · £7.99</div>
+        <div class="wf-card"><div class="wf-cover">cover</div><b>Project Hail Mary</b><br>Andy Weir<br>★ 4.8 · £10.99</div>
+        <div class="wf-card"><div class="wf-cover">cover</div><b>The Midnight Library</b><br>Matt Haig<br>★ 4.3 · £8.50</div>
+        <div class="wf-card"><div class="wf-cover">cover</div><b>Klara and the Sun</b><br>Kazuo Ishiguro<br>★ 3.9 · £9.99</div>
+        <!-- more cards … -->
+      </div>
+
+      <div style="text-align:center;margin:12px 0">
+        <span class="wf-btn ghost">‹ Prev</span>
+        <span class="wf-btn" style="padding:4px 10px">1</span>
+        <span class="wf-btn ghost">2</span>
+        <span class="wf-btn ghost">3</span>
+        <span class="wf-btn ghost">…</span>
+        <span class="wf-btn ghost">Next ›</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wf-foot">© BookNest · About · Contact · Delivery &amp; Returns</footer>
+
+  <p class="wf-sub" style="margin-top:10px"><b>Responsive:</b> sidebar collapses above results on mobile; grid 3 → 2 → 1 columns.</p>
+</div>
+</body>
+</html>

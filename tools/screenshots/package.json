@@ -1,0 +1,8 @@
+{
+  "name": "booknest-shots",
+  "private": true,
+  "description": "Capture app screenshots for the coursework documentation using system Edge via puppeteer-core.",
+  "dependencies": {
+    "puppeteer-core": "^23.0.0"
+  }
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframe 03 — Book Details</title>
+<link rel="stylesheet" href="wf.css">
+</head>
+<body>
+<div class="page">
+  <span class="wf-cap">Wireframe 03 / 05 — Book details page</span>
+
+  <header class="wf-header">
+    <div class="wf-logo">📚 BookNest</div>
+    <div class="wf-search">🔍 Search… <span class="wf-tag">autocomplete</span></div>
+    <nav class="wf-nav"><span>Log in</span><span>Cart 🛒 <span class="wf-badge">2</span></span></nav>
+  </header>
+  <nav class="wf-catnav"><a href="catalogue.html">Fiction</a> › <span style="color:#33506b">The Silent Patient</span></nav>
+
+  <main class="wf-row">
+    <!-- ============ COVER + ACTIONS ============ -->
+    <section class="wf-sidebar" style="width:230px">
+      <div class="wf"><div class="wf-cover" style="height:200px">book cover<br>image</div></div>
+      <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
+        <span class="wf-btn">🛒 Add to Cart</span>
+        <span class="wf-btn ghost">♥ Add to Wishlist</span>
+      </div>
+      <p class="wf-sub" style="margin-top:8px">In stock — 14 copies <span class="wf-tag">Stock: 14</span></p>
+    </section>
+
+    <!-- ============ DETAILS ============ -->
+    <section class="wf-col">
+      <h2 class="wf-title">The Silent Patient</h2>
+      <p class="wf-sub">by <b>Alex Michaelides</b> · ISBN 978-1409181637 · Genre: Fiction (Thriller)</p>
+      <p><b>Price: £8.99</b> <s style="color:#98a5b1">£11.99</s> <span class="wf-badge">−25%</span></p>
+
+      <div class="wf-zone">
+        <span class="wf-cap">Synopsis</span>
+        <p style="font-size:13px;color:#44546a">Alicia Berenson's life is seemingly perfect… until she shoots her husband five times and never speaks again. A criminal psychotherapist is determined to unravel her silence. [placeholder — full synopsis text here]</p>
+      </div>
+
+      <div class="wf-zone">
+        <span class="wf-cap">Preview excerpt</span>
+        <div class="wf" style="background:#f3f1ea;font-size:12px;color:#55677a">
+          “Theo Faber looked up at the vast, grey building… [first ~3 pages of text shown with 'continue reading' link]” <span class="wf-tag">preview excerpt</span>
+        </div>
+      </div>
+
+      <div class="wf-row">
+        <div class="wf-col">
+          <span class="wf-cap">Customer reviews (312)</span>
+          <div class="wf" style="font-size:12px">
+            <span class="wf-stars">★★★★★</span> “Brilliant twist!” — Sarah M. · 12 Jun 2026<br>
+            <span class="wf-stars">★★★★☆</span> “Slow start, great ending.” — James T. · 2 Jun 2026<br>
+            <span class="wf-stars">★★★★★</span> “Couldn't put it down.” — Priya K. · 28 May 2026
+          </div>
+          <div class="wf" style="margin-top:8px;font-size:12px;border-style:solid">
+            <b>Write a review</b> (logged-in customers)<br>
+            Rating: ★☆☆☆☆ ▾ &nbsp; Comment: [textarea]<br>
+            <span class="wf-btn blueprint">Submit review</span> <span class="wf-tag">requires login → reviews table</span>
+          </div>
+        </div>
+        <div class="wf" style="width:170px;font-size:13px;text-align:center">
+          <span class="wf-cap">Rating summary</span>
+          <b style="font-size:26px">4.6</b><br><span class="wf-stars">★★★★★</span><br>312 ratings<br><br>5★ ████████ 62%<br>4★ ██████ 27%<br>3★ █ 6%
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wf-foot">© BookNest · About · Contact</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframe 05 — Admin Panel</title>
+<link rel="stylesheet" href="wf.css">
+</head>
+<body>
+<div class="page">
+  <span class="wf-cap">Wireframe 05 / 05 — Admin panel</span>
+
+  <header class="wf-header">
+    <div class="wf-logo">📚 BookNest <span class="wf-badge">Admin</span></div>
+    <div class="wf-search">🔍 Search books / orders / users…</div>
+    <nav class="wf-nav"><span>👤 admin@booknest.com ▾</span><span>Log out</span></nav>
+  </header>
+
+  <main class="wf-row">
+    <!-- ============ ADMIN NAV ============ -->
+    <aside class="wf-admin-side wf">
+      <div class="wf-menu-item active">📊 Dashboard</div>
+      <div class="wf-menu-item">📚 Books <span class="wf-tag">CRUD</span></div>
+      <div class="wf-menu-item">📦 Orders</div>
+      <div class="wf-menu-item">👥 Users</div>
+      <div class="wf-menu-item">🏷️ Promotions</div>
+    </aside>
+
+    <!-- ============ CONTENT AREA (tab switched) ============ -->
+    <section class="wf-col">
+      <div class="wf-tabs">
+        <div class="wf-tab active">Dashboard</div>
+        <div class="wf-tab">Books</div>
+        <div class="wf-tab">Orders</div>
+        <div class="wf-tab">Users</div>
+        <div class="wf-tab">Promotions</div>
+      </div>
+
+      <!-- Analytics cards -->
+      <div class="wf-grid" style="grid-template-columns:repeat(4,1fr)">
+        <div class="wf-card"><b style="font-size:20px">£4,210</b><br>Revenue (July)</div>
+        <div class="wf-card"><b style="font-size:20px">187</b><br>Orders this month</div>
+        <div class="wf-card"><b style="font-size:20px">1,240</b><br>Registered users</div>
+        <div class="wf-card"><b style="font-size:20px">96</b><br>Books in catalogue</div>
+      </div>
+
+      <div class="wf-zone">
+        <span class="wf-cap">Sales by genre — bar chart</span>
+        <div class="wf-chart"></div>
+        <p class="wf-sub">Top seller this week: “The Silent Patient” (42 copies)</p>
+      </div>
+
+      <!-- Inventory table -->
+      <div class="wf-zone">
+        <span class="wf-cap">Inventory management — add / update / remove books</span>
+        <div style="text-align:right;margin-bottom:6px"><span class="wf-btn">＋ Add new book</span> <span class="wf-btn blueprint">Export CSV</span></div>
+        <table class="wf-table">
+          <thead><tr><th>BookID</th><th>Title</th><th>Author</th><th>Genre</th><th>Price</th><th>Stock</th><th>Actions</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>The Silent Patient</td><td>Alex Michaelides</td><td>Fiction</td><td>£8.99</td><td>14</td><td><a>Edit</a> · <a style="color:#a33">Delete</a></td></tr>
+            <tr><td>2</td><td>Dune</td><td>Frank Herbert</td><td>Fiction</td><td>£9.49</td><td>32</td><td><a>Edit</a> · <a style="color:#a33">Delete</a></td></tr>
+            <tr><td>3</td><td>Atomic Habits</td><td>James Clear</td><td>Non-fiction</td><td>£12.99</td><td>5</td><td><a>Edit</a> · <a style="color:#a33">Delete</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Orders table -->
+      <div class="wf-zone">
+        <span class="wf-cap">Order tracking — update status</span>
+        <table class="wf-table">
+          <thead><tr><th>OrderID</th><th>Customer</th><th>Date</th><th>Total</th><th>Status ▾</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td>1042</td><td>sarah.m@mail.com</td><td>04 Aug 2026</td><td>£22.22</td><td><span class="wf-badge">Paid</span></td><td>Mark shipped</td></tr>
+            <tr><td>1041</td><td>james.t@mail.com</td><td>04 Aug 2026</td><td>£17.98</td><td><span class="wf-badge">Pending</span></td><td>View details</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wf-foot">Admin panel · BookNest back-office</footer>
+
+  <p class="wf-sub" style="margin-top:10px"><b>Responsive:</b> admin sidebar collapses into top tab bar on tablet/mobile; tables horizontally scrollable.</p>
+</div>
+</body>
+</html>

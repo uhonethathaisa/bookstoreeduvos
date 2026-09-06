@@ -1,0 +1,25 @@
+# ---------------------------------------------------------------
+# BookNest Online Bookstore — gitignore
+# ---------------------------------------------------------------
+
+# Node / tooling dependencies (screenshot capture tool)
+node_modules/
+tools/screenshots/node_modules/
+
+# Runtime artefacts (simulated e-mail log, demo uploads)
+storage/
+public/uploads/covers/
+
+# Logs & OS junk
+*.log
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local IDE / editor files
+.vscode/
+.idea/
+*.code-workspace
+
+# Temp test files
+bn_*.txt

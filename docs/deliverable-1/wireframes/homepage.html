@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframe 01 — Homepage</title>
+<link rel="stylesheet" href="wf.css">
+</head>
+<body>
+<div class="page">
+  <span class="wf-cap">Wireframe 01 / 05 — Homepage (Online Bookstore)</span>
+
+  <!-- ============ HEADER ============ -->
+  <header class="wf-header">
+    <div class="wf-logo">📚 BookNest <span class="wf-tag">logo → Homepage</span></div>
+    <div class="wf-search">🔍 Search by title, author or ISBN… <span class="wf-tag">autocomplete dropdown</span></div>
+    <nav class="wf-nav">
+      <span>Log in / Register</span>
+      <span>Wishlist ♥</span>
+      <span>Cart 🛒 <span class="wf-badge">2</span></span>
+    </nav>
+  </header>
+
+  <!-- ============ CATEGORY NAV ============ -->
+  <nav class="wf-catnav">
+    <span><a href="catalogue.html">Fiction</a></span>
+    <span><a href="catalogue.html">Non-fiction</a></span>
+    <span><a href="catalogue.html">Children's</a></span>
+    <span style="margin-left:auto">Best Sellers · New Arrivals</span>
+  </nav>
+
+  <main>
+    <!-- ============ PROMOTION BANNER ============ -->
+    <section class="wf-hero">
+      <strong>Summer Sale — up to 30% off!</strong><br>
+      <span style="font-size:13px">Use code <b>READ30</b> at checkout · Ends 31 August</span>
+    </section>
+
+    <!-- ============ FEATURED BOOKS ============ -->
+    <section>
+      <span class="wf-cap">Featured books — horizontal carousel / grid</span>
+      <div class="wf-grid" style="grid-template-columns:repeat(5,1fr)">
+        <div class="wf-card"><div class="wf-cover">cover</div>Title<br><span style="color:#68798a">Author</span><br><b>£9.99</b></div>
+        <div class="wf-card"><div class="wf-cover">cover</div>Title<br><span style="color:#68798a">Author</span><br><b>£12.50</b></div>
+        <div class="wf-card"><div class="wf-cover">cover</div>Title<br><span style="color:#68798a">Author</span><br><b>£7.20</b></div>
+        <div class="wf-card"><div class="wf-cover">cover</div>Title<br><span style="color:#68798a">Author</span><br><b>£14.99</b></div>
+        <div class="wf-card"><div class="wf-cover">cover</div>Title<br><span style="color:#68798a">Author</span><br><b>£8.40</b></div>
+      </div>
+    </section>
+
+    <!-- ============ CATEGORY STRIPS ============ -->
+    <section class="wf-row">
+      <div class="wf-col">
+        <span class="wf-cap">Fiction — top picks</span>
+        <div class="wf-grid" style="grid-template-columns:repeat(3,1fr)">
+          <div class="wf-card"><div class="wf-cover">cover</div>Title · £10.00</div>
+          <div class="wf-card"><div class="wf-cover">cover</div>Title · £10.00</div>
+          <div class="wf-card"><div class="wf-cover">cover</div>Title · £10.00</div>
+        </div>
+      </div>
+      <div class="wf-col">
+        <span class="wf-cap">Non-fiction — top picks</span>
+        <div class="wf-grid" style="grid-template-columns:repeat(3,1fr)">
+          <div class="wf-card"><div class="wf-cover">cover</div>Title · £15.00</div>
+          <div class="wf-card"><div class="wf-cover">cover</div>Title · £15.00</div>
+          <div class="wf-card"><div class="wf-cover">cover</div>Title · £15.00</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wf-foot">© BookNest · About · Contact · Delivery &amp; Returns · Newsletter sign-up box</footer>
+
+  <p class="wf-sub" style="margin-top:10px"><b>Responsive:</b> header collapses, grid → 2 columns (tablet) → 1 column (mobile); promo banner stacks.</p>
+</div>
+</body>
+</html>

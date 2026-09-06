@@ -1,0 +1,159 @@
+/* =========================================================
+   Blueprint / wireframe stylesheet — Online Bookstore (D1)
+   Shared by all five wireframe HTML mockups.
+   ========================================================= */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #eef1f4;
+  color: #22303f;
+  padding: 18px;
+}
+
+/* Blueprint annotation captions */
+.wf-cap {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #55677a;
+  border-bottom: 1px dotted #b7c2cd;
+  padding-bottom: 4px;
+  margin-bottom: 10px;
+}
+
+/* Generic blueprint box */
+.wf {
+  border: 1.5px dashed #5f7285;
+  border-radius: 6px;
+  background: #f8fafb;
+  padding: 10px;
+  position: relative;
+}
+
+/* Small inline tag used to annotate a region */
+.wf-tag {
+  display: inline-block;
+  font-size: 10px;
+  color: #33506b;
+  background: #e3ecf3;
+  border: 1px solid #b6c8d6;
+  border-radius: 10px;
+  padding: 1px 8px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+/* ---------- Page frame ---------- */
+.page {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #ffffff;
+  border: 1px solid #ccd5dd;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .08);
+}
+
+/* ---------- Header / logo / search ---------- */
+.wf-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px;
+  background: #dfe7ee;
+  border: 1.5px dashed #5f7285;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+.wf-logo { font-weight: 700; font-size: 17px; }
+.wf-search {
+  flex: 1; background: #fff; border: 1px solid #9fb1c0;
+  border-radius: 16px; padding: 6px 14px; font-size: 13px; color: #7b8b9a;
+}
+.wf-nav { display: flex; gap: 14px; font-size: 13px; white-space: nowrap; }
+
+/* ---------- Category nav ---------- */
+.wf-catnav {
+  display: flex; gap: 22px; padding: 8px 10px; margin-bottom: 12px;
+  background: #f2f5f7; border-bottom: 1.5px solid #c3ced8; font-size: 13px;
+}
+
+/* ---------- Buttons (placeholder look) ---------- */
+.wf-btn {
+  display: inline-block; background: #33506b; color: #fff; border-radius: 4px;
+  padding: 6px 14px; font-size: 13px;
+}
+.wf-btn.ghost { background: #fff; color: #33506b; border: 1px solid #33506b; }
+.wf-btn.blueprint { background: #f8fafb; color: #55677a; border: 1px dashed #5f7285; }
+
+/* ---------- Hero / promo ---------- */
+.wf-hero {
+  background: #e9eef4; border: 1.5px dashed #5f7285; border-radius: 8px;
+  padding: 26px; text-align: center; margin-bottom: 16px; color: #4a5b6d;
+}
+
+/* ---------- Grids / cards ---------- */
+.wf-grid {
+  display: grid; gap: 12px; margin-bottom: 12px;
+}
+.wf-card {
+  border: 1px dashed #7c8fa1; background: #fbfcfd; border-radius: 6px;
+  padding: 8px; text-align: center; font-size: 12px;
+}
+.wf-cover {
+  height: 110px; background: #d9e2ea; border: 1px solid #b4c3d0;
+  border-radius: 4px; display: flex; align-items: center; justify-content: center;
+  color: #6b7c8c; font-size: 11px; margin-bottom: 6px;
+}
+
+/* ---------- Layout helpers ---------- */
+.wf-row { display: flex; gap: 14px; }
+.wf-col { flex: 1; }
+.wf-sidebar { width: 220px; flex: none; }
+.wf-zone { margin-bottom: 14px; }
+.wf-foot {
+  margin-top: 12px; padding: 8px; text-align: center; font-size: 11px;
+  color: #8b99a6; border-top: 1px solid #d5dde4;
+}
+.wf-title { font-size: 18px; margin-bottom: 4px; }
+.wf-sub { color: #68798a; font-size: 12px; margin-bottom: 12px; }
+
+/* filters inside sidebar */
+.wf-filt { font-size: 13px; padding: 4px 0; border-bottom: 1px dotted #c7d1da; }
+.wf-filt b { display: block; font-size: 12px; margin: 6px 0 2px; }
+
+/* ---------- Tables (cart, admin) ---------- */
+.wf-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.wf-table th, .wf-table td {
+  border: 1px dashed #9aacba; padding: 8px 10px; text-align: left; background: #fbfcfd;
+}
+.wf-table th { background: #e5ecf2; font-weight: 600; }
+
+/* ---------- Tabs / admin sidebar ---------- */
+.wf-tabs { display: flex; gap: 6px; margin-bottom: 10px; }
+.wf-tab {
+  padding: 5px 14px; font-size: 12px; border: 1px dashed #5f7285; border-radius: 4px 4px 0 0;
+  background: #eef2f5; cursor: default;
+}
+.wf-tab.active { background: #f8fafb; border-bottom: 2px solid #33506b; }
+.wf-admin-side { width: 190px; flex: none; }
+.wf-menu-item {
+  padding: 8px 10px; font-size: 13px; border-left: 3px solid transparent; margin-bottom: 2px;
+}
+.wf-menu-item.active { border-left-color: #33506b; background: #e8eef4; font-weight: 600; }
+
+/* Chart placeholder */
+.wf-chart { height: 90px; background: repeating-linear-gradient(90deg, #d3dde5 0 26px, #fbfcfd 26px 40px); border: 1px dashed #9aacba; border-radius: 4px; }
+
+/* Rating stars placeholder */
+.wf-stars { color: #e0a800; letter-spacing: 2px; font-size: 12px; }
+
+.wf-badge { background: #dff0d8; color: #3c763d; border: 1px solid #a3d0a0; border-radius: 10px; padding: 1px 8px; font-size: 11px; }
+
+@media (max-width: 640px) {
+  .wf-header { flex-wrap: wrap; }
+  .wf-row { flex-direction: column; }
+  .wf-sidebar, .wf-admin-side { width: 100%; }
+}

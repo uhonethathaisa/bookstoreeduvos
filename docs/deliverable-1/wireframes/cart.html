@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframe 04 — Shopping Cart</title>
+<link rel="stylesheet" href="wf.css">
+</head>
+<body>
+<div class="page">
+  <span class="wf-cap">Wireframe 04 / 05 — Shopping cart page</span>
+
+  <header class="wf-header">
+    <div class="wf-logo">📚 BookNest</div>
+    <div class="wf-search">🔍 Search…</div>
+    <nav class="wf-nav"><span>Log in</span><span>Cart 🛒 <span class="wf-badge">2</span></span></nav>
+  </header>
+
+  <main>
+    <h2 class="wf-title">Your Shopping Cart</h2>
+    <p class="wf-sub">2 items · <a href="catalogue.html">Continue shopping →</a></p>
+
+    <div class="wf-row">
+      <!-- ============ LINE ITEMS ============ -->
+      <section class="wf-col">
+        <table class="wf-table">
+          <thead>
+            <tr><th>Item</th><th>Price</th><th>Quantity</th><th>Subtotal</th><th></th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>The Silent Patient</b><br><span style="font-size:11px;color:#68798a">Alex Michaelides · Fiction</span></td>
+              <td>£8.99</td>
+              <td>[ − ] <b>2</b> [ + ] <span class="wf-tag">quantity stepper (JS)</span></td>
+              <td>£17.98</td>
+              <td>✕ remove</td>
+            </tr>
+            <tr>
+              <td><b>Dune</b><br><span style="font-size:11px;color:#68798a">Frank Herbert · Fiction</span></td>
+              <td>£9.49</td>
+              <td>[ − ] <b>1</b> [ + ]</td>
+              <td>£9.49</td>
+              <td>✕ remove</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="wf-sub" style="margin-top:8px">Empty cart state: “Your cart is empty — <a href="catalogue.html">browse the catalogue</a>.”</p>
+      </section>
+
+      <!-- ============ ORDER SUMMARY ============ -->
+      <aside class="wf" style="width:280px;flex:none">
+        <span class="wf-cap">Order summary</span>
+        <table class="wf-table">
+          <tr><td>Subtotal</td><td style="text-align:right">£27.47</td></tr>
+          <tr><td>Shipping</td><td style="text-align:right">£2.99</td></tr>
+          <tr><td>Discount <span class="wf-tag">promo code</span></td><td style="text-align:right">−£8.24</td></tr>
+          <tr><td><b>Total</b></td><td style="text-align:right"><b>£22.22</b></td></tr>
+        </table>
+        <div style="margin-top:10px">
+          Promo: [ READ30 ] <span class="wf-btn blueprint">Apply</span> <span class="wf-tag">validated vs promotions table</span>
+        </div>
+        <div style="margin-top:12px;text-align:center">
+          <span class="wf-btn" style="display:block;text-align:center">Proceed to Checkout →</span>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="wf-foot">© BookNest · Secure checkout · Delivery &amp; Returns</footer>
+
+  <p class="wf-sub" style="margin-top:10px"><b>Responsive:</b> table becomes stacked cards on mobile; summary moves below items.</p>
+</div>
+</body>
+</html>
