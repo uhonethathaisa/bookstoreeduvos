@@ -20,3 +20,15 @@ jobs:
           source: "."
           target: "/home/u952164533/domains/cyan-leopard-644325.hostingersite.com/public_html"
           rm: false
+
+      - name: Run Database Migrations
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          password: ${{ secrets.HOSTINGER_PASSWORD }}
+          port: ${{ secrets.HOSTINGER_PORT }}
+          script: |
+            cd /home/u952164533/domains/cyan-leopard-644325.hostingersite.com/public_html
+            php migrate.php
+
