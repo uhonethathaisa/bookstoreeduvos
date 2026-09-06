@@ -1,0 +1,22 @@
+name: Deploy to Hostinger
+on:
+  push:
+    branches:
+      - main # Change this if your default branch is 'master'
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy via SCP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          password: ${{ secrets.HOSTINGER_PASSWORD }}
+          port: ${{ secrets.HOSTINGER_PORT }}
+          source: "."
+          target: "/home/u952164533/domains/cyan-leopard-644325.hostingersite.com/public_html"
+          rm: false
