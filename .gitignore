@@ -21,5 +21,8 @@ desktop.ini
 .idea/
 *.code-workspace
 
+# Server-only credentials override (never commit live passwords)
+public/includes/config.local.php
+
 # Temp test files
 bn_*.txt
