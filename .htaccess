@@ -1,0 +1,25 @@
+# ---- BookNest: serve storefront from /public (Hostinger docroot workaround) ----
+# Purpose: Hostinger serves the domain from public_html and offers no Document
+# Root option on this plan. This file delegates every request into the /public
+# folder while refusing direct access to backend directories.
+#
+# IMPORTANT:
+#   * If the server Document Root is EVER changed to public_html/public
+#     (Path A / Option B), RENAME this file to backup.htaccess — the rewrite
+#     below would otherwise map /css/... to /public/public/css/... and break
+#     the site.
+#   * The appleboy/scp-action transfer may skip dotfiles, so also create this
+#     file manually in hPanel File Manager at public_html/.htaccess.
+
+Options -Indexes
+DirectoryIndex index.php
+RewriteEngine On
+
+# 1) Backend folders can never be reached directly.
+RewriteRule ^(?:db|controllers|docs|tools|storage|\.git|\.github)(/|$) - [F,L]
+RewriteRule ^\.htaccess$ - [F,L]
+
+# 2) Everything else that is not already a /public request is rewritten there.
+RewriteCond %{REQUEST_URI} !^/public/ [NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ /public/$1 [L]
