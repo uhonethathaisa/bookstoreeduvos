@@ -1,0 +1,29 @@
+name: SSH Connectivity Check
+# -----------------------------------------------------------------------------
+# TEMPORARY handshake test — verifies GitHub Actions can authenticate to
+# Hostinger BEFORE any real SCP deployment runs.
+# Runs ONLY when triggered manually (Actions tab → "Run workflow").
+# Expected log output:  "SSH_HANDSHAKE_OK"
+# -----------------------------------------------------------------------------
+on:
+  workflow_dispatch:
+
+jobs:
+  ssh-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Test SSH authentication handshake
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          password: ${{ secrets.HOSTINGER_PASSWORD }}
+          port: ${{ secrets.HOSTINGER_PORT }}
+          script: |
+            echo "SSH_HANDSHAKE_OK"
+            whoami
+            pwd
+            ls -la
