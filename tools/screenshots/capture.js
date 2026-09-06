@@ -47,6 +47,14 @@ async function main() {
   await guest.goto(BASE + '/catalogue.php?genre=Fiction&rating=4&sort=price_asc', { waitUntil: 'networkidle0' });
   await shot(guest, '03-catalogue-filtered.png', { full: true });
 
+  // Add-to-Cart modal (AJAX) — click the first "Add to cart" button
+  await guest.goto(BASE + '/catalogue.php?genre=Fiction', { waitUntil: 'networkidle0' });
+  await guest.click('button.js-add-to-cart');
+  await guest.waitForSelector('#addToCartModal:not([hidden])', { timeout: 5000 });
+  await sleep(600);
+  await shot(guest, '18-add-to-cart-modal.png');
+  await guest.keyboard.press('Escape');
+
   await guest.goto(BASE + '/book.php?id=1', { waitUntil: 'networkidle0' });
   await shot(guest, '04-book-details.png', { full: true });
 

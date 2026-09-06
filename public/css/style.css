@@ -572,6 +572,57 @@ input[aria-invalid="true"] { border-color: var(--bad); }
   .profile-page .field-row .field { max-width: none; }
 }
 
+/* =========================================================
+   Add-to-Cart modal (AJAX)
+   ========================================================= */
+.modal { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; padding: 16px; }
+.modal[hidden] { display: none; }
+.modal-overlay { position: absolute; inset: 0; background: rgba(15, 25, 38, .55); }
+.modal-card {
+  position: relative; background: #fff; border-radius: 14px; width: 100%; max-width: 420px;
+  padding: 28px 26px 24px; text-align: center; box-shadow: 0 18px 50px rgba(0, 0, 0, .28);
+  animation: modalIn .18s ease-out;
+}
+@keyframes modalIn { from { opacity: 0; transform: translateY(10px) scale(.98); } to { opacity: 1; transform: none; } }
+
+.modal-close {
+  position: absolute; top: 10px; right: 12px; border: 0; background: none; font-size: 26px;
+  line-height: 1; cursor: pointer; color: var(--muted); padding: 2px 8px; border-radius: 6px;
+}
+.modal-close:hover { background: #eef1f5; color: var(--ink); }
+
+.modal-icon {
+  width: 54px; height: 54px; margin: 0 auto 10px; border-radius: 50%;
+  background: #e8f5e9; color: #1b5e20; font-size: 26px; line-height: 54px;
+}
+.modal-card h2 { margin: 0 0 6px; font-size: 22px; }
+.modal-book-title { margin: 0; font-weight: 700; color: var(--brand); font-size: 16px; }
+.modal-sub { margin: 4px 0 16px; color: var(--muted); font-size: 13px; }
+
+.atc-qty { margin: 0 0 10px; }
+.atc-qty label { display: block; font-weight: 600; font-size: 13px; margin-bottom: 8px; }
+.qty-stepper { display: inline-flex; align-items: center; border: 1px solid #c8d2dc; border-radius: 8px; overflow: hidden; }
+.qty-stepper .step {
+  width: 40px; height: 42px; border: 0; background: #f0f3f7; font-size: 20px; cursor: pointer; color: var(--brand);
+}
+.qty-stepper .step:hover { background: #e3e9f0; }
+.qty-stepper .step:disabled { opacity: .45; cursor: not-allowed; }
+.qty-stepper input {
+  width: 64px; height: 42px; border: 0; border-left: 1px solid var(--line); border-right: 1px solid var(--line);
+  text-align: center; font-size: 16px; font-weight: 700; -moz-appearance: textfield; appearance: textfield;
+}
+.qty-stepper input::-webkit-outer-spin-button, .qty-stepper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.atc-qty .hint { margin: 8px 0 0; }
+
+.modal-msg { min-height: 18px; margin: 6px 0 2px; font-size: 13px; }
+.modal-msg.error { color: var(--bad); font-weight: 600; }
+.modal-msg.success { color: var(--good); font-weight: 600; }
+
+.modal-actions { display: flex; gap: 10px; margin-top: 14px; }
+.modal-actions .btn { flex: 1; }
+.modal-actions .btn:disabled { opacity: .6; cursor: progress; }
+
+
 
 
 

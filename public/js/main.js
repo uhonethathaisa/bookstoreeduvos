@@ -24,14 +24,17 @@ function toast(type, msg) {
   setTimeout(() => el.remove(), 3500);
 }
 
-/* ---------------- async cart ---------------- */
+/* ---------------- async cart helper ---------------- */
 async function postCart(params) {
-  const res = await fetch('api/cart.php', {
+  const res = await fetch('ajax_add_to_cart.php', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
     body: new URLSearchParams(params).toString(),
   });
-  return res.json();
+  let data = {};
+  try { data = await res.json(); } catch (_err) { /* non-JSON response */ }
+  data._status = res.status;
+  return data;
 }
 
 function setCartBadge(n) {
@@ -39,21 +42,173 @@ function setCartBadge(n) {
   if (b) b.textContent = n;
 }
 
-function initQuickAdd() {
-  $$('form.quick-add').forEach((form) => {
-    form.addEventListener('submit', async (ev) => {
-      ev.preventDefault();
-      try {
-        const data = await postCart(new FormData(form));
-        setCartBadge(data.count);
-        if (data.ok) toast('success', data.message || 'Added to your cart.');
-        else toast('error', data.message || 'Could not add that item.');
-      } catch (_err) {
-        form.submit(); // graceful fallback to normal POST
+/* ---------------- Add-to-Cart modal (AJAX flow) ----------------
+ * 1) User clicks "Add to cart" — the button carries data-book-id / -title /
+ *    -stock attributes.
+ * 2) We POST { action:'add', book_id, quantity } to ajax_add_to_cart.php —
+ *    no page reload.
+ * 3) On success a modal opens showing "Added to Cart!", the book title and a
+ *    quantity stepper capped at the available stock.
+ * 4) "Continue Shopping" closes the modal. "Update Cart & Checkout" syncs the
+ *    chosen quantity (action:'set'), then redirects to cart.php.
+ * If JavaScript is disabled the original <form> still POSTs to cart.php
+ * (progressive enhancement).
+ * ---------------------------------------------------------------- */
+function initAddToCartModal() {
+  const modal = $('#addToCartModal');
+  if (!modal) return;
+
+  const els = {
+    overlay:   modal.querySelector('.modal-overlay'),
+    closeBtn:  modal.querySelector('.modal-close'),
+    title:     $('#atcBookTitle'),
+    meta:      $('#atcBookMeta'),
+    bookId:    $('#atcBookId'),
+    qty:       $('#atcQty'),
+    stockNote: $('#atcStockNote'),
+    msg:       $('#atcMsg'),
+    form:      $('#atcForm'),
+    checkout:  $('#atcCheckoutBtn'),
+  };
+  let lastStock = 1;
+
+  const setMsg = (text, kind) => {
+    els.msg.textContent = text || '';
+    els.msg.className = 'modal-msg' + (kind ? ' ' + kind : '');
+  };
+  const updateSteps = () => {
+    modal.querySelectorAll('[data-atc-step]').forEach((b) => {
+      const dir = parseInt(b.dataset.atcStep, 10);
+      const cur = parseInt(els.qty.value, 10);
+      b.disabled = (dir < 0 && cur <= 1) || (dir > 0 && cur >= lastStock);
+    });
+  };
+  const clampQty = () => {
+    let v = parseInt(els.qty.value, 10);
+    if (Number.isNaN(v)) v = 1;
+    v = Math.max(1, Math.min(v, lastStock));
+    els.qty.value = v;
+    updateSteps();
+  };
+  const openModal = (book) => {
+    els.bookId.value = book.id;
+    els.title.textContent = book.title;
+    els.meta.textContent = book.stock === 1 ? '1 copy in stock' : book.stock + ' copies in stock';
+    lastStock = Math.max(1, book.stock);
+    els.qty.min = '1';
+    els.qty.max = String(lastStock);
+    els.qty.value = String(Math.min(book.cartQty || 1, lastStock));
+    els.stockNote.textContent = 'Available stock: ' + lastStock;
+    setMsg('', '');
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    updateSteps();
+    els.qty.focus();
+    els.qty.select();
+  };
+  const closeModal = () => {
+    modal.hidden = true;
+    document.body.style.overflow = '';
+    els.checkout.disabled = false;
+    els.checkout.textContent = 'Update Cart & Checkout';
+  };
+
+  /* ---- handle one "add" request from a quick-add form ---- */
+  const addHandler = async (form, button) => {
+    const hidden = form.querySelector('input[name="book_id"]');
+    const id    = parseInt((button && button.dataset.bookId) || '', 10) || (hidden ? parseInt(hidden.value, 10) : 0);
+    const title = (button && button.dataset.bookTitle) || 'Book';
+    const stock = parseInt((button && button.dataset.bookStock) || form.dataset.bookStock || '0', 10);
+    const qtyField = form.querySelector('input[name="qty"]');
+    const qty = qtyField ? Math.max(1, parseInt(qtyField.value, 10) || 1) : 1;
+
+    if (!(id > 0)) return true;                       // nothing to add → native behaviour
+    if (!(stock > 0)) return true;                    // no stock data → native POST fallback
+
+    try {
+      const res = await postCart({ action: 'add', book_id: id, quantity: qty });
+      if (res.success) {
+        setCartBadge(res.cartCount);
+        openModal({
+          id: res.bookId,
+          title,
+          stock: res.stock,
+          cartQty: (res.cartQty > 0 && res.cartQty <= res.stock) ? res.cartQty : qty,
+        });
+      } else {
+        // Server rejected it (out of stock / quantity over limit).
+        toast('error', res.message || 'Could not add this item to your cart.');
       }
+    } catch (_err) {
+      // Fetch failed (offline, server error) — tell the user; the page is untouched.
+      toast('error', 'Network error — could not add the item. Please try again.');
+    }
+    return false; // suppress native form navigation (JS handled the request)
+  };
+
+  /* ---- intercept "Add to cart" form submissions (catalogue/book/wishlist) ---- */
+  document.addEventListener('submit', (ev) => {
+    const form = ev.target.closest('form.quick-add, form.js-add-form');
+    if (!form) return;
+    ev.preventDefault();                     // stop the native page reload
+    const btn = form.querySelector('.js-add-to-cart');
+    addHandler(form, btn);
+  });
+
+  /* ---- quantity stepper (min 1, max stock) ---- */
+  modal.querySelectorAll('[data-atc-step]').forEach((b) => {
+    b.addEventListener('click', () => {
+      const dir = parseInt(b.dataset.atcStep, 10);
+      let v = (parseInt(els.qty.value, 10) || 1) + dir;
+      v = Math.max(1, Math.min(v, lastStock));
+      els.qty.value = v;
+      updateSteps();
     });
   });
+  els.qty.addEventListener('input', clampQty);
+  els.qty.addEventListener('change', clampQty);
+
+  /* ---- "Update Cart & Checkout": sync exact quantity, then go to cart ---- */
+  els.form.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    const id = parseInt(els.bookId.value, 10);
+    const qty = parseInt(els.qty.value, 10) || 1;
+
+    els.checkout.disabled = true;
+    els.checkout.textContent = 'Updating…';
+    setMsg('', '');
+
+    try {
+      // action 'set' makes the session cart match the modal quantity exactly.
+      const res = await postCart({ action: 'set', book_id: id, quantity: qty });
+      if (res.success) {
+        setCartBadge(res.cartCount);
+        setMsg('Added to Cart! Taking you to checkout…', 'success');
+        setTimeout(() => { window.location.href = 'cart.php'; }, 450);
+      } else {
+        setMsg(res.message || 'Could not update the cart.', 'error');
+        els.checkout.disabled = false;
+        els.checkout.textContent = 'Update Cart & Checkout';
+      }
+    } catch (_err) {
+      // AJAX failed — leave the modal open and let the user retry.
+      setMsg('Network error — could not reach the server. Please try again.', 'error');
+      els.checkout.disabled = false;
+      els.checkout.textContent = 'Update Cart & Checkout';
+    }
+  });
+
+  /* ---- close modal (×, overlay, "Continue Shopping", Escape) ---- */
+  modal.querySelectorAll('[data-atc-close]').forEach((el) => {
+    el.addEventListener('click', (ev) => { ev.preventDefault(); closeModal(); });
+  });
+  document.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape' && !modal.hidden) closeModal();
+  });
+  els.overlay.addEventListener('click', closeModal);
 }
+
+
 
 /* ---------------- search autocomplete ---------------- */
 function initAutocomplete(input, box) {
@@ -340,7 +495,7 @@ function initProfileCard() {
 
 /* ---------------- boot ---------------- */
 document.addEventListener('DOMContentLoaded', () => {
-  initQuickAdd();
+  initAddToCartModal();
   initAutocomplete($('#searchInput'), $('#autocomplete'));
   const heroInput = $('#heroQ');
   if (heroInput) initAutocomplete(heroInput, null);

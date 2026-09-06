@@ -64,7 +64,10 @@ include __DIR__ . '/includes/header.php';
             <input type="hidden" name="book_id" value="<?= (int) $b['BookID'] ?>">
             <input type="hidden" name="qty" value="1">
             <input type="hidden" name="next" value="cart.php">
-            <button type="submit" class="btn btn-dark btn-sm">Add to cart</button>
+            <button type="submit" class="btn btn-dark btn-sm js-add-to-cart"
+                    data-book-id="<?= (int) $b['BookID'] ?>"
+                    data-book-title="<?= e($b['Title']) ?>"
+                    data-book-stock="<?= (int) $b['Stock'] ?>">Add to cart</button>
           </form>
           <form method="post" action="wishlist.php">
             <input type="hidden" name="action" value="remove_wish">

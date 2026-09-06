@@ -29,7 +29,10 @@ function book_card_html(array $b): string
              <input type="hidden" name="book_id" value="' . $id . '">
              <input type="hidden" name="qty" value="1">
              <input type="hidden" name="next" value="' . e($_SERVER['REQUEST_URI'] ?? '') . '">
-             <button type="submit" class="btn btn-dark btn-sm">Add to cart</button>
+             <button type="submit" class="btn btn-dark btn-sm js-add-to-cart"
+                     data-book-id="' . $id . '"
+                     data-book-title="' . e($b['Title']) . '"
+                     data-book-stock="' . $stock . '">Add to cart</button>
            </form>'
         : '<p class="out-of-stock">Out of stock</p>';
     $html .= '</article>';

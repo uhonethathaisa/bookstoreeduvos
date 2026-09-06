@@ -110,7 +110,7 @@ include __DIR__ . '/includes/header.php';
     <?= cover_html($book, 'cover-large') ?>
     <p class="stock-note"><?= $stock > 0 ? 'In stock — ' . $stock . ' copies available' : '<span class="out-of-stock">Out of stock</span>' ?></p>
 
-    <form method="post" action="cart.php">
+    <form method="post" action="cart.php" class="quick-add js-add-form">
       <input type="hidden" name="action" value="add">
       <input type="hidden" name="book_id" value="<?= $id ?>">
       <input type="hidden" name="next" value="cart.php">
@@ -118,7 +118,11 @@ include __DIR__ . '/includes/header.php';
         <label for="qty">Qty</label>
         <input type="number" id="qty" name="qty" value="1" min="1" max="<?= max(1, $stock) ?>">
       </div>
-      <button type="submit" class="btn btn-dark btn-block" <?= $stock > 0 ? '' : 'disabled' ?>>Add to cart</button>
+      <button type="submit" class="btn btn-dark btn-block js-add-to-cart"
+              data-book-id="<?= $id ?>"
+              data-book-title="<?= e($book['Title']) ?>"
+              data-book-stock="<?= $stock ?>"
+              <?= $stock > 0 ? '' : 'disabled' ?>>Add to cart</button>
     </form>
 
     <form method="post" action="book.php?id=<?= $id ?>">
